@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f1f4b"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Wyche CRM"><link rel="manifest" href="manifest.json"><link rel="icon" type="image/png" href="../icon-192.png"><link rel="apple-touch-icon" sizes="180x180" href="../icon-180.png"><script>window.WY_DATA_URL="../data.json";window.WY_SW_URL="../sw.js";window.WY_SW_SCOPE="../";</script>
+<title>Wyche Capital CRM</title>
+<style>@font-face{font-family:Anton;src:url(../anton.ttf) format("truetype");font-display:swap}
+:root{--n:#0f1f4b;--g:#f5c542;--bg:#f3f5fa}
+*{box-sizing:border-box}body{margin:0;font:16px system-ui,-apple-system,sans-serif;background:var(--bg);color:#1b1f2a;padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+header{background:var(--n);color:var(--g);padding:14px 16px;padding-top:calc(14px + env(safe-area-inset-top));position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center}
+header h1{margin:0;font-size:19px}header button{background:var(--g);color:var(--n);border:0;border-radius:22px;font-weight:700;padding:10px 16px;font-size:15px}
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--n);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:5}
+nav button{flex:1;background:none;border:0;color:#aab3cc;padding:10px 0;font-size:12px;min-height:60px}nav button b{display:block;font-size:20px}
+nav button.on{color:var(--g)}main{padding:12px}
+.card{background:#fff;border-radius:14px;padding:12px;margin:0 0 10px;box-shadow:0 1px 3px #0002}
+.card h3{margin:0 0 2px;font-size:16px}.muted{color:#667;font-size:13px}
+.acts{display:flex;gap:8px;margin-top:10px}.acts a,.btn{flex:1;text-align:center;background:var(--n);color:#fff;text-decoration:none;border-radius:10px;padding:11px 6px;font-size:14px;border:0;min-height:44px}
+.acts a.off{opacity:.3;pointer-events:none}.btn.gold{background:var(--g);color:var(--n);font-weight:700}.btn.red{background:#b3261e}
+select,input,textarea{width:100%;font-size:16px;padding:11px;border:1px solid #ccd;border-radius:10px;background:#fff;min-height:44px}
+label{display:block;font-size:13px;color:#556;margin:10px 0 4px}
+.filters{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px}.filters input{grid-column:1/-1}
+.board{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+.col{min-width:86%;scroll-snap-align:start;background:#e4e8f2;border-radius:14px;padding:8px}
+@media(min-width:800px){.col{min-width:280px}}
+.col h2{font-size:15px;margin:4px 6px 8px;color:var(--n);display:flex;justify-content:space-between}
+.col.over{outline:3px dashed var(--g)}.tag{display:inline-block;background:var(--g);color:var(--n);border-radius:8px;padding:1px 7px;font-size:12px;margin:3px 3px 0 0;font-weight:600}
+.due{color:#b3261e;font-weight:700}.stat{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat .card{text-align:center}.stat b{font-size:28px;color:var(--n);display:block}
+.modal{position:fixed;inset:0;background:#0008;z-index:10;display:flex;align-items:flex-end}.sheet{background:var(--bg);width:100%;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:16px;padding-bottom:calc(20px + env(safe-area-inset-bottom))}
+.chips label{display:inline-flex;gap:6px;align-items:center;background:#fff;border:1px solid #ccd;border-radius:20px;padding:8px 12px;margin:0 6px 6px 0;font-size:15px;color:#222}.chips input{width:auto;min-height:0}
+.log{border-left:3px solid var(--g);padding:4px 8px;margin:6px 0;background:#fff;border-radius:6px}
+.row{display:flex;gap:8px}.row>*{flex:1}h2.sec{color:var(--n);font-size:17px;margin:14px 2px 8px}
+.hero{position:relative;margin:-12px -12px 12px;min-height:calc(100vh - 140px);background:radial-gradient(120% 80% at 50% 20%,#14306f 0%,#0a1a45 55%,#050f2b 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 20px;overflow:hidden;color:#fff}
+.hero:before{content:"";position:absolute;inset:auto -20% -8% -20%;height:70%;background:url(../crest_t.png) center/contain no-repeat;opacity:.08;pointer-events:none}
+.hero .kick{font:700 13px system-ui;letter-spacing:.3em;color:#c9d3ea;text-transform:uppercase;margin-bottom:14px}
+.hero .aff{font-family:Anton,Impact,"Arial Black",sans-serif;font-size:clamp(44px,13vw,92px);line-height:1.02;color:var(--g);text-shadow:0 4px 24px #0008;text-transform:uppercase;max-width:900px;position:relative}
+.hero .bar{width:90px;height:5px;background:var(--g);margin:22px auto 16px;border-radius:3px}
+.hero .sub{font:600 15px system-ui;color:#dbe3f5;position:relative}
+.hero .scroll{margin-top:26px;font:600 13px system-ui;color:#9fb0d6;position:relative}
+header .brand{display:flex;align-items:center;gap:8px}header .brand img{height:38px}
+</style></head><body>
+<header><div class="brand"><img src="../logo_header.png" alt="Wyche Capital"><h1 style="font-size:15px">CRM</h1></div><div style="display:flex;gap:6px"><button onclick="setToken()" title="Set access key">🔑</button><button onclick="loadLatest(true)" title="Load latest data">⟳</button><button id="addBtn">+ Add</button></div></header>
+<main id="main"></main>
+<nav id="nav"></nav><div id="modal"></div>
+<script>
+const SEED={"version":0,"contacts":[],"events":[]};
+const AFF=["MAKE THE CALLS. ALL OF THEM.", "THE PHONE IS YOUR WEAPON. PICK IT UP.", "REJECTION IS FUEL. BURN IT.", "OWN THE MORNING. OWN THE DAY.", "EVERY NO GETS YOU CLOSER TO YES.", "OUTWORK YESTERDAY'S YOU.", "NOBODY IS COMING. GO GET IT.", "DIAL. FOLLOW UP. CLOSE. REPEAT.", "HUNGRY BEATS TALENTED.", "YOUR PIPELINE IS YOUR PAYCHECK. FILL IT.", "BE THE FIRST CALL, NOT THE LAST.", "THE DEAL IS IN THE FOLLOW-UP.", "CONFIDENCE IS EARNED ON THE PHONES.", "100 DIALS BEFORE EXCUSES.", "WIN THE MORNING. THE AFTERNOON FOLLOWS.", "CLOSE THE NEXT ONE. THEN THE NEXT ONE.", "PRESSURE IS A PRIVILEGE.", "STOP WAITING. START DIALING.", "DISCIPLINE IS THE EDGE.", "YOU DON'T FIND DEALS. YOU HUNT THEM.", "EVERY INVESTOR NEEDS CAPITAL. BE THE ONE THEY CALL.", "CALL RELUCTANCE IS EXPENSIVE.", "THE TOP OF THE BOARD IS EARNED DAILY.", "BUILD THE BOOK. BUILD THE EMPIRE.", "SPEED WINS DEALS.", "KNOW YOUR NUMBERS COLD.", "ONE MORE CALL. ALWAYS.", "THE GRIND IS THE GAME.", "SHOW UP LIKE IT'S THE BIGGEST DAY OF THE YEAR.", "FEAR DIALS SLOW. HUNGER DIALS FAST.", "YOUR WORK ETHIC IS YOUR BRAND.", "SOLVE THEIR PROBLEM. EARN THE DEAL.", "EVERY DOOR FINANCED IS A WIN.", "DON'T CHASE. ATTRACT, THEN CLOSE.", "CONSISTENCY CRUSHES TALENT.", "TODAY'S CALLS ARE NEXT MONTH'S CLOSINGS.", "BE RELENTLESS. BE RESPECTFUL. BE PAID.", "THE LION DOESN'T ASK PERMISSION.", "OBJECTIONS ARE QUESTIONS. ANSWER THEM.", "RAISE YOUR STANDARD. RAISE YOUR NUMBERS.", "SMILE AND DIAL. THEN DIAL AGAIN.", "BIG GOALS DEMAND BIG ACTIVITY.", "FOLLOW UP UNTIL THEY SAY NO OR YES.", "NO ZERO DAYS.", "YOU ARE ONE CONVERSATION FROM A CLOSING.", "OWN YOUR TERRITORY.", "WORK THE LIST. WORK IT AGAIN.", "CHAMPIONS PRACTICE THE PITCH.", "MOMENTUM IS BUILT ONE DIAL AT A TIME.", "THE MARKET REWARDS THE BOLD.", "LEAVE NOTHING IN THE TANK.", "DSCR. FIX & FLIP. NEW BUILD. YOU'VE GOT THE ANSWER.", "BE THE LENDER INVESTORS BRAG ABOUT.", "EXCUSES DON'T CLOSE LOANS.", "GET COMFORTABLE BEING UNCOMFORTABLE.", "HIT THE NUMBER. THEN BEAT IT.", "YOUR NEXT BIG CLIENT IS ON TODAY'S LIST.", "HUSTLE WITH INTEGRITY.", "FINISH STRONGER THAN YOU STARTED.", "WYCHE CAPITAL DOESN'T SLOW DOWN."];function todaysAff(){const d=new Date(),k=Math.floor((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()))/864e5);return AFF[k%AFF.length]}
+const STAGES=["New","Verified","Outreach Ready","Contacted","Responded","Qualified","Scenario/Offer Prepared","Active Deal","Closed/Lost"],LOANS=["DSCR","Fix & Flip","Construction"];
+const KEY="wycheCRM.v1";let db=JSON.parse(localStorage.getItem(KEY)||"null")||JSON.parse(JSON.stringify(SEED));
+const MIG={"New lead":"New","Contacted":"Contacted","Replied":"Responded","Call booked":"Qualified","Application":"Scenario/Offer Prepared","Funded":"Closed/Lost","Not a fit":"Closed/Lost"};
+function migrate(SD){SD=SD||SEED;if((db.version||1)>=SD.version)return false;
+ const edited=c=>(c.activity&&c.activity.length)||c.followup||(c.stage&&c.stage!="New lead"&&c.stage!="New")||c.userEdited;
+ const keep=db.contacts.filter(c=>!/^c\d{1,3}$/.test(c.id)||edited(c));
+ keep.forEach(c=>{if(MIG[c.stage]){if(c.stage=="Funded"||c.stage=="Not a fit")(c.activity=c.activity||[]).unshift({t:new Date().toISOString(),type:"Stage",note:"Migrated: "+c.stage+" → Closed/Lost"});c.stage=MIG[c.stage]}
+  c.pipeline=c.pipeline||"A";c.optout=!!c.optout;c.verified=c.verified||"";c.confidence=c.confidence||"";if(!STAGES.includes(c.stage))c.stage="New"});
+ const names=new Set(keep.map(c=>(c.company||"").toLowerCase().split("(")[0].trim()));
+ SD.contacts.forEach(n=>{const k=n.company.toLowerCase().split("(")[0].trim(),ex=keep.find(c=>c.id==n.id||(c.company||"").toLowerCase().split("(")[0].trim()==k);if(ex){["phone","email","source","allsources","verified","confidence","pipeline","principal","indicators","score"].forEach(f=>{if(!ex[f]&&n[f])ex[f]=n[f]});if(n.kind=="partner")ex.kind="partner"}else keep.push(JSON.parse(JSON.stringify(n)))});
+ db={version:SD.version,contacts:keep,events:db.events&&db.events.length?db.events:SD.events};return true}
+migrate();
+const save=()=>localStorage.setItem(KEY,JSON.stringify(db));save();
+let tab="today",F={q:"",city:"",stage:"",type:"",pipe:"",showOpt:false};
+const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"']/g,c=>"&#"+c.charCodeAt(0)+";");
+const today=()=>new Date().toLocaleDateString("en-CA");
+const firstPhone=p=>(p||"").split(/[;,]/)[0].replace(/[^\d+]/g,""),firstEmail=e=>(e||"").split(/[;,]/)[0].trim();
+const TABS=[["today","📅","Today"],["pipeline","📋","Pipeline"],["contacts","👥","Contacts"],["partners","🤝","Partners"],["propb","🏚","Pipeline B"],["dash","📊","Stats"]];
+function nav(){$("#nav").innerHTML=TABS.map(t=>`<button class="${t[0]==tab?"on":""}" onclick="go('${t[0]}')"><b>${t[1]}</b>${t[2]}</button>`).join("")}
+function go(t){tab=t;nav();render();scrollTo(0,0)}
+function card(c,drag){const p=firstPhone(c.phone),e=firstEmail(c.email);const od=c.followup&&c.followup<=today();
+return `<div class="card" ${drag?`draggable="true" ondragstart="event.dataTransfer.setData('id','${c.id}')"`:""}>
+<div onclick="detail('${c.id}')"><h3>${esc(c.company)}</h3><div class="muted">${esc(c.principal||"—")} · ${esc(c.city)} · ${esc(c.type)}</div>
+<div>${c.pipeline=="B"?`<span class="tag">B · score ${c.score??"?"}</span>`:`<span class="tag" style="background:#dfe6f7">A</span>`}${c.kind=="partner"?`<span class="tag">Referral</span>`:""}${c.loans.map(l=>`<span class="tag">${esc(l)}</span>`).join("")}${c.optout?`<span class="tag" style="background:#b3261e;color:#fff">OPTED OUT</span>`:""}</div>${c.pipeline=="B"?`<div class="muted">${esc(c.indicators)}</div>`:""}${!c.phone&&!c.email?`<div class="muted"><b>Contact not found</b></div>`:""}
+${c.followup?`<div class="muted ${od?"due":""}">Follow-up: ${c.followup}${od?" (due)":""}</div>`:""}</div>
+<select aria-label="Stage" onchange="setStage('${c.id}',this.value)" style="margin-top:8px">${STAGES.map(s=>`<option ${s==c.stage?"selected":""}>${s}</option>`).join("")}</select>
+<div class="acts"><a class="${p?"":"off"}" href="tel:${p}">📞 Call</a><a class="${p?"":"off"}" href="sms:${p}">💬 Text</a><a class="${e?"":"off"}" href="mailto:${esc(e)}">✉️ Email</a></div></div>`}
+function setStage(id,s){const c=db.contacts.find(x=>x.id==id);if(c.stage!=s){c.userEdited=true;c.activity.unshift({t:new Date().toISOString(),type:"Stage",note:c.stage+" → "+s});c.stage=s;save();render()}}
+function filtered(kind){const ks=Array.isArray(kind)?kind:[kind];return db.contacts.filter(c=>ks.includes(c.kind)&&(F.showOpt||!c.optout)&&(!F.pipe||c.pipeline==F.pipe)&&(!F.city||c.city.includes(F.city))&&(!F.stage||c.stage==F.stage)&&(!F.type||c.type.toLowerCase().includes(F.type.toLowerCase()))&&(!F.q||JSON.stringify(c).toLowerCase().includes(F.q.toLowerCase())))}
+function filters(){const opt=(a,v,l)=>`<option value="">${l}</option>`+a.map(x=>`<option ${x==v?"selected":""}>${x}</option>`).join("");
+return `<div class="filters"><input placeholder="Search…" value="${esc(F.q)}" oninput="F.q=this.value;deb()">
+<select onchange="F.city=this.value;render()">${opt(["Cincinnati","Dayton","Raleigh","Durham"],F.city,"All cities")}</select>
+<select onchange="F.stage=this.value;render()">${opt(STAGES,F.stage,"All stages")}</select>
+<select onchange="F.type=this.value;render()">${opt(["Flipper","Builder","Remodel","Property manag","Cash home buyer","Investor","Single-family","Two-family","Apartments"],F.type,"All types")}</select>
+<select onchange="F.pipe=this.value;render()">${opt(["A","B"],F.pipe,"Pipeline A+B")}</select><label class="muted" style="grid-column:span 2;display:flex;gap:6px;align-items:center;margin:0"><input type="checkbox" style="width:auto;min-height:0" ${F.showOpt?"checked":""} onchange="F.showOpt=this.checked;render()">Show opted-out</label></div>`}
+let dt;function deb(){clearTimeout(dt);dt=setTimeout(()=>{render();const i=$(".filters input");i.focus();i.setSelectionRange(99,99)},300)}
+function render(){const m=$("#main");
+if(tab=="today"){const d=db.contacts.filter(c=>c.followup&&c.followup<=today()).sort((a,b)=>a.followup.localeCompare(b.followup));
+const up=db.contacts.filter(c=>c.followup>today()).sort((a,b)=>a.followup.localeCompare(b.followup)).slice(0,10);
+m.innerHTML=`<section class="hero"><div class="kick">Today\'s mindset · ${new Date().toLocaleDateString(undefined,{weekday:"long",month:"short",day:"numeric"})}</div><div class="aff">${esc(todaysAff())}</div><div class="bar"></div><div class="sub">${d.length} follow-up${d.length==1?"":"s"} due · ${db.contacts.filter(c=>c.kind!="propB"&&c.stage=="New"&&!c.optout).length} new leads waiting</div><div class="scroll">▼ Today\'s follow-ups</div></section><h2 class="sec">Overdue & due today (${d.length})</h2>${d.map(c=>card(c)).join("")||'<div class="card muted">Nothing due. Set follow-up dates on contacts.</div>'}<h2 class="sec">Upcoming</h2>${up.map(c=>card(c)).join("")||'<div class="card muted">No upcoming follow-ups.</div>'}`}
+else if(tab=="pipeline"){const L=filtered(["prospect","propB"]);m.innerHTML=filters()+`<div class="muted" style="margin:0 2px 8px">Swipe between stages · use the dropdown or drag to move</div><div class="board">${STAGES.map(s=>{const cs=L.filter(c=>c.stage==s);return `<div class="col" data-s="${s}" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="this.classList.remove('over');setStage(event.dataTransfer.getData('id'),'${s}')"><h2>${s}<span>${cs.length}</span></h2>${cs.map(c=>card(c,1)).join("")}</div>`}).join("")}</div>`}
+else if(tab=="contacts"||tab=="partners"){const k=tab=="contacts"?"prospect":"partner",L=filtered(k);m.innerHTML=filters()+`<button class="btn gold" style="width:100%;margin-bottom:10px" onclick="edit(null,'${k}')">+ New ${k=="partner"?"referral partner":"contact"}</button><div class="muted" style="margin:0 2px 8px">${L.length} shown</div>`+L.map(c=>card(c)).join("")}
+else if(tab=="propb"){const L=filtered("propB").sort((a,b)=>(b.score||0)-(a.score||0));m.innerHTML=`<div class="card muted">Pipeline B: properties with possible seller-motivation signals from public county records (Hamilton Co.). Research signals only. DNC/consent unchecked.</div>`+filters()+`<div class="muted" style="margin:0 2px 8px">${L.length} shown · sorted by score</div>`+L.map(c=>card(c)).join("")}
+else if(tab=="events"){m.innerHTML=`<button class="btn gold" style="width:100%;margin-bottom:10px" onclick="editEv(null)">+ New event</button>`+db.events.map(e=>`<div class="card"><h3>${esc(e.name)}</h3><div class="muted">${esc(e.city)}</div><div>${esc(e.schedule)}</div>${e.notes?`<div class="muted">${esc(e.notes)}</div>`:""}<div class="acts">${e.link?`<a href="${esc(e.link)}" target="_blank" rel="noopener">🔗 Event</a>`:""}${e.phone?`<a href="tel:${firstPhone(e.phone)}">📞 Call</a>`:""}<button class="btn" onclick="editEv('${e.id}')">✏️ Edit</button></div></div>`).join("")}
+else{const P=db.contacts.filter(c=>c.kind=="prospect"),d=db.contacts.filter(c=>c.followup&&c.followup<=today()).length;
+m.innerHTML=`<h2 class="sec">Pipeline by stage</h2><div class="stat">${STAGES.map(s=>`<div class="card"><b>${P.filter(c=>c.stage==s).length}</b>${s}</div>`).join("")}<div class="card"><b>${P.length}</b>Total prospects</div></div>
+<h2 class="sec">Other</h2><div class="stat"><div class="card"><b class="${d?"due":""}">${d}</b>Follow-ups due</div><div class="card"><b>${db.contacts.filter(c=>c.kind=="partner").length}</b>Referral partners</div></div>
+<h2 class="sec">Pipeline B</h2><div class="stat"><div class="card"><b>${db.contacts.filter(c=>c.kind=="propB").length}</b>Scored properties</div><div class="card"><b>${db.contacts.filter(c=>c.optout).length}</b>Opted out</div></div>
+<h2 class="sec">Events</h2><button class="btn gold" style="width:100%;margin-bottom:10px" onclick="go('events')">Open REIA events</button>
+<div class="muted">Data version ${db.version||1}</div><div class="row" style="margin:8px 0"><button class="btn gold" onclick="loadLatest(true)">⟳ Load latest data</button><button class="btn red" onclick="forceRefresh()">Force refresh app</button></div><h2 class="sec">Data</h2><div class="card"><div class="row"><button class="btn" onclick="expJSON()">Export JSON</button><button class="btn" onclick="expCSV()">Export CSV</button></div>
+<label>Import JSON or CSV (replaces/merges contacts)</label><input type="file" accept=".json,.csv" onchange="imp(this.files[0])">
+<button class="btn red" style="width:100%;margin-top:12px" onclick="if(confirm('Reset all data to the original list?')){db=JSON.parse(JSON.stringify(SEED));save();render()}">Reset to original data</button></div>`}}
+function modal(h){$("#modal").innerHTML=`<div class="modal" onclick="if(event.target==this)closeM()"><div class="sheet">${h}</div></div>`}
+function closeM(){$("#modal").innerHTML=""}
+function detail(id){const c=db.contacts.find(x=>x.id==id),p=firstPhone(c.phone),e=firstEmail(c.email);
+modal(`<div class="row" style="align-items:center"><h2 style="margin:0;color:var(--n)">${esc(c.company)}</h2><button class="btn" style="flex:0 0 70px" onclick="closeM()">Close</button></div>
+<div class="muted">${esc(c.principal||"")} · ${esc(c.city)} · ${esc(c.type)} · <b>${esc(c.stage)}</b></div>
+<div class="acts"><a class="${p?"":"off"}" href="tel:${p}">📞 Call</a><a class="${p?"":"off"}" href="sms:${p}">💬 Text</a><a class="${e?"":"off"}" href="mailto:${esc(e)}">✉️ Email</a></div>
+<div class="card" style="margin-top:10px"><div>📞 ${esc(c.phone||"—")}</div><div>✉️ ${esc(c.email||"—")}</div><div>🌐 ${c.website?`<a href="${esc(c.website)}" target="_blank" rel="noopener">${esc(c.website)}</a>`:"—"}</div><div class="muted">Source: ${c.source?`<a href="${esc(c.source)}" target="_blank" rel="noopener">link</a>`:"—"} · Verified ${esc(c.verified||"—")} · Pipeline ${esc(c.pipeline||"A")}</div><div class="muted">Match confidence: ${esc(c.confidence||"—")}</div>${c.pipeline=="B"?`<div><b>Score ${c.score}</b>: ${esc(c.indicators)}</div>`:""}<div class="muted">⚠️ DNC/consent unchecked</div><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" style="width:auto;min-height:0" ${c.optout?"checked":""} onchange="setOpt('${c.id}',this.checked)">Opted out (suppress from lists)</label><div>${c.loans.map(l=>`<span class="tag">${l}</span>`).join("")}</div><p style="white-space:pre-wrap">${esc(c.notes)}</p></div>
+<label>Next follow-up</label><div class="row"><input type="date" id="fu" value="${c.followup}"><button class="btn gold" onclick="setFU('${id}')">Set</button></div>
+<label>Log activity</label><div class="row"><select id="at"><option>Call</option><option>Email</option><option>Text</option><option>Meeting</option><option>Note</option></select></div><textarea id="an" rows="3" placeholder="What happened?" style="margin-top:6px"></textarea><button class="btn gold" style="width:100%;margin-top:6px" onclick="logA('${id}')">Add to log</button>
+<h3>Activity</h3>${c.activity.map(a=>`<div class="log"><b>${esc(a.type)}</b> <span class="muted">${new Date(a.t).toLocaleString()}</span><div>${esc(a.note)}</div></div>`).join("")||'<div class="muted">No activity yet.</div>'}
+<div class="row" style="margin-top:14px"><button class="btn" onclick="edit('${id}')">✏️ Edit</button><button class="btn red" onclick="del('${id}')">🗑 Delete</button></div>`)}
+function setOpt(id,v){const c=db.contacts.find(x=>x.id==id);c.optout=v;c.userEdited=true;c.activity.unshift({t:new Date().toISOString(),type:"Note",note:v?"Marked opted out":"Opt-out removed"});save();render();detail(id)}
+function setFU(id){const c=db.contacts.find(x=>x.id==id);c.followup=$("#fu").value;save();render();detail(id)}
+function logA(id){const n=$("#an").value.trim();if(!n)return;const c=db.contacts.find(x=>x.id==id);c.activity.unshift({t:new Date().toISOString(),type:$("#at").value,note:n});
+if(["Call","Email","Text","Meeting"].includes($("#at").value)&&["New","Verified","Outreach Ready"].includes(c.stage))c.stage="Contacted";save();render();detail(id)}
+function del(id){if(confirm("Delete this contact?")){db.contacts=db.contacts.filter(x=>x.id!=id);save();closeM();render()}}
+const FIELDS=[["company","Company"],["principal","Principal"],["city","City"],["type","Type (Flipper/Builder/Rental/Wholesaler)"],["email","Email"],["phone","Phone"],["website","Website"],["source","Source URL"],["verified","Verification date"],["confidence","Match confidence"],["pipeline","Pipeline (A/B)"]];
+function edit(id,kind){const c=id?db.contacts.find(x=>x.id==id):{id:"c"+Date.now(),kind:kind||"prospect",loans:[],stage:"New",followup:"",activity:[],notes:"",pipeline:"A",optout:false,verified:"",confidence:""};
+modal(`<h2 style="color:var(--n);margin-top:0">${id?"Edit":"New"} ${c.kind=="partner"?"referral partner":"contact"}</h2>${FIELDS.map(f=>`<label>${f[1]}</label><input id="f_${f[0]}" value="${esc(c[f[0]]||"")}">`).join("")}
+<label>Stage</label><select id="f_stage">${STAGES.map(s=>`<option ${s==c.stage?"selected":""}>${s}</option>`).join("")}</select>
+<label>Loan interest</label><div class="chips">${LOANS.map(l=>`<label><input type="checkbox" value="${l}" ${c.loans.includes(l)?"checked":""}>${l}</label>`).join("")}</div>
+<label>Notes</label><textarea id="f_notes" rows="4">${esc(c.notes)}</textarea>
+<div class="row" style="margin-top:12px"><button class="btn" onclick="closeM()">Cancel</button><button class="btn gold" id="sv">Save</button></div>`);
+$("#sv").onclick=()=>{if(!$("#f_company").value.trim())return alert("Company is required");FIELDS.forEach(f=>c[f[0]]=$("#f_"+f[0]).value.trim());c.stage=$("#f_stage").value;c.notes=$("#f_notes").value;c.loans=[...document.querySelectorAll(".chips input:checked")].map(i=>i.value);c.userEdited=true;
+if(!id)db.contacts.push(c);save();closeM();render()}}
+function editEv(id){const e=id?db.events.find(x=>x.id==id):{id:"e"+Date.now()};const EF=[["name","Name"],["city","City"],["schedule","Schedule / next date"],["link","Link"],["phone","Phone"],["notes","Notes"]];
+modal(`<h2 style="color:var(--n);margin-top:0">${id?"Edit":"New"} event</h2>${EF.map(f=>`<label>${f[1]}</label><input id="g_${f[0]}" value="${esc(e[f[0]]||"")}">`).join("")}<div class="row" style="margin-top:12px">${id?`<button class="btn red" id="dl">Delete</button>`:""}<button class="btn" onclick="closeM()">Cancel</button><button class="btn gold" id="sv">Save</button></div>`);
+$("#sv").onclick=()=>{EF.forEach(f=>e[f[0]]=$("#g_"+f[0]).value.trim());if(!id)db.events.push(e);save();closeM();render()};
+if(id)$("#dl").onclick=()=>{if(confirm("Delete event?")){db.events=db.events.filter(x=>x.id!=id);save();closeM();render()}}}
+function dl(name,text,type){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;a.click()}
+const COLS=["kind","pipeline","company","principal","city","type","loans","email","phone","website","source","verified","confidence","score","indicators","optout","stage","followup","notes","activity"];
+const q=v=>'"'+String(v??"").replace(/"/g,'""')+'"';
+function expJSON(){dl("wyche-crm-"+today()+".json",JSON.stringify(db,null,2),"application/json")}
+function expCSV(){dl("wyche-crm-"+today()+".csv",COLS.join(",")+"\n"+db.contacts.map(c=>COLS.map(k=>q(k=="loans"?c.loans.join("; "):k=="activity"?c.activity.map(a=>a.t.slice(0,10)+" "+a.type+": "+a.note).join(" | "):c[k])).join(",")).join("\n"),"text/csv")}
+function parseCSV(t){const r=[];let row=[],f="",inq=false;for(let i=0;i<t.length;i++){const ch=t[i];if(inq){if(ch=='"'){if(t[i+1]=='"'){f+='"';i++}else inq=false}else f+=ch}else if(ch=='"')inq=true;else if(ch==","){row.push(f);f=""}else if(ch=="\n"||ch=="\r"){if(ch=="\r"&&t[i+1]=="\n")i++;row.push(f);r.push(row);row=[];f=""}else f+=ch}if(f||row.length){row.push(f);r.push(row)}return r.filter(x=>x.some(Boolean))}
+function imp(file){if(!file)return;const rd=new FileReader();rd.onload=()=>{try{if(file.name.endsWith(".json")){const d=JSON.parse(rd.result);if(!Array.isArray(d.contacts))throw"bad file";if(confirm("Replace all data with this file?")){db={version:SEED.version,contacts:d.contacts,events:d.events||[]};}}
+else{const [h,...rows]=parseCSV(rd.result);let n=0;rows.forEach(r=>{const o={};h.forEach((k,i)=>o[k.trim()]=r[i]||"");if(!o.company)return;n++;db.contacts.push({id:"c"+Date.now()+n,kind:o.kind=="partner"?"partner":"prospect",company:o.company,principal:o.principal||"",city:o.city||"",type:o.type||"",loans:(o.loans||"").split(/;\s*/).filter(l=>LOANS.includes(l)),email:o.email||"",phone:o.phone||"",website:o.website||"",source:o.source||"",stage:STAGES.includes(o.stage)?o.stage:"New",pipeline:o.pipeline=="B"?"B":"A",verified:o.verified||"",confidence:o.confidence||"",optout:/^(true|yes|1)$/i.test(o.optout||""),followup:o.followup||"",notes:o.notes||"",activity:[]})});alert("Added "+n+" contacts")}save();render()}catch(e){alert("Import failed: "+e)}};rd.readAsText(file)}
+$("#addBtn").onclick=()=>edit(null,tab=="partners"?"partner":"prospect");
+const DATA_URL=window.WY_DATA_URL||"data.json",SW_URL=window.WY_SW_URL||"sw.js",SW_SCOPE=window.WY_SW_SCOPE||"./";
+const TKEY="wycheCRM.token",REPO_API="https://api.github.com/repos/brwyche/wyche-crm-data/contents/data.json?ref=main";function setToken(){const t=prompt("Paste your GitHub access token (stored only on this phone). Leave blank to remove it.",localStorage.getItem(TKEY)||"");if(t===null)return;if(t.trim())localStorage.setItem(TKEY,t.trim());else localStorage.removeItem(TKEY);loadLatest(true)}async function loadLatest(manual){try{const tk=localStorage.getItem(TKEY);if(!tk){if(manual)setToken();return}const r=await fetch(REPO_API+"&t="+Date.now(),{cache:"no-store",headers:{Authorization:"Bearer "+tk,Accept:"application/vnd.github.raw+json"}});if(r.status==401||r.status==404){if(manual)alert("Token rejected (HTTP "+r.status+"). Tap the key button to set a new one.");return}if(!r.ok)throw r.status;const d=await r.json();
+ if((d.version||0)>(db.version||1)){migrate(d);save();render();if(manual)alert("Loaded data version "+d.version+" ("+db.contacts.length+" records). Your edits were kept.")}else if(manual)alert("Already up to date (version "+(db.version||1)+", "+db.contacts.length+" records).")}catch(e){if(manual)alert("Could not load latest data (offline?): "+e)}}
+async function forceRefresh(){if(!confirm("Refresh the app? Your saved leads and notes stay on this phone."))return;try{if(navigator.serviceWorker){for(const r of await navigator.serviceWorker.getRegistrations())await r.unregister()}if(window.caches){for(const k of await caches.keys())await caches.delete(k)}}catch(e){}location.replace(location.pathname+"?v="+Date.now())}
+if(false)navigator.serviceWorker.register(SW_URL,{scope:SW_SCOPE,updateViaCache:"none"}).then(r=>r.update()).catch(()=>{});
+loadLatest(false);
+nav();render();
+</script></body></html>
